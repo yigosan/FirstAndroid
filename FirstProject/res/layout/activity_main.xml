@@ -21,7 +21,7 @@
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
         android:layout_marginTop="15dp"
-        android:text="Click15" />
+        android:text="Click16" />
 
     <ToggleButton
         android:id="@+id/toggleButton1"
