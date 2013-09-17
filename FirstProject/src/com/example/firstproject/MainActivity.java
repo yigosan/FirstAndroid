@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,6 +28,7 @@ public class MainActivity extends Activity implements IColorProvider{
 	Button btn1 = null;
 	Button btn2 = null;
 	Button btn3 = null;
+	Button btn4 = null;
 	TextView txturl = null;
 	
     @Override
@@ -43,10 +45,19 @@ public class MainActivity extends Activity implements IColorProvider{
         btn1 = (Button)findViewById(R.id.button1);
         btn2 = (Button)findViewById(R.id.button2);
         btn3 = (Button)findViewById(R.id.button3);
+        btn4 = (Button)findViewById(R.id.button4);
         imv1.setVisibility(View.INVISIBLE);
         imv2.setVisibility(View.INVISIBLE);
         txturl = (TextView)findViewById(R.id.txtUrl);
         
+        btn4.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				startActivity(new Intent(getApplicationContext(),SqlPage.class));
+			}
+		});
         btn3.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -177,8 +188,9 @@ public class MainActivity extends Activity implements IColorProvider{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    	super.onCreateOptionsMenu(menu);    	
+        getMenuInflater().inflate(R.menu.mymenu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
     
 	public int getRed(){return this._red;}
@@ -188,4 +200,13 @@ public class MainActivity extends Activity implements IColorProvider{
 	public int getGreen(){return this._green;}
 	public void setGreen(int val){this._green = val;this.updateBackground();}
     
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		switch(item.getItemId())
+		{
+			case R.id.menuitem1 : System.exit(0); return true;
+			case R.id.menuitem2 : startActivity(new Intent(getApplicationContext(),SqlPage.class)); return true;
+		}
+		return false;
+	}
 }
