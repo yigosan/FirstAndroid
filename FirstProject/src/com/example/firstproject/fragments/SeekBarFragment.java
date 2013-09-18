@@ -15,7 +15,7 @@ import com.example.firstproject.IColorProvider;
 import com.example.firstproject.OnSeekBarChangeListener_withReference;
 import com.example.firstproject.R;
 
-public class SeekBarFragment extends Fragment implements ActionBar.TabListener, IColorProvider  {
+public class SeekBarFragment extends Fragment implements IColorProvider { //implements ActionBar.TabListener, IColorProvider  {
 
 	RelativeLayout rl1 = null;
 	
@@ -30,8 +30,6 @@ public class SeekBarFragment extends Fragment implements ActionBar.TabListener, 
 	public SeekBarFragment(){
 		// TODO Auto-generated constructor stub
 	}
-	
-    private Fragment mFragment;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,11 +39,15 @@ public class SeekBarFragment extends Fragment implements ActionBar.TabListener, 
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.seekbarlayout, container, false);
-        sb1 = (SeekBar)v.findViewById(R.id.seekBar1);
+    	View v = inflater.inflate(R.layout.seekbarlayout, container, false);
+    	sb1 = (SeekBar)v.findViewById(R.id.seekBar1);
         sb2 = (SeekBar)v.findViewById(R.id.seekBar2);
         sb3 = (SeekBar)v.findViewById(R.id.seekBar3);
         rl1 = (RelativeLayout)v.findViewById(R.id.background);
+        
+        sb1.setMax(255);
+        sb2.setMax(255);
+        sb3.setMax(255);
         
         sb1.setOnSeekBarChangeListener(new OnSeekBarChangeListener_withReference(this) {
 			 
@@ -65,7 +67,6 @@ public class SeekBarFragment extends Fragment implements ActionBar.TabListener, 
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 				// TODO Auto-generated method stub
-				sb1.setMax(255);
 				this._colorProvider.setRed(progress);
 				
 			}
@@ -89,7 +90,6 @@ public class SeekBarFragment extends Fragment implements ActionBar.TabListener, 
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 				// TODO Auto-generated method stub
-				sb2.setMax(255);
 				this._colorProvider.setBlue(progress);
 				
 			}
@@ -113,19 +113,34 @@ public class SeekBarFragment extends Fragment implements ActionBar.TabListener, 
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 				// TODO Auto-generated method stub
-				sb3.setMax(255);
 				this._colorProvider.setGreen(progress);
 				
 			}
 		});
         
+        if(null != savedInstanceState)
+        {
+        	int red = savedInstanceState.getInt("SeekBarRed",0);
+        	int blue = savedInstanceState.getInt("SeekBarBlue");
+        	int green = savedInstanceState.getInt("SeekBarGreen");
+        	this.setRed(red);
+        	this.setBlue(blue);
+        	this.setGreen(green);
+        }
         return v;
     }
+    
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+    	super.onSaveInstanceState(outState);
+        outState.putInt("SeekBarRed", sb1.getProgress());
+        outState.putInt("SeekBarBlue", sb2.getProgress());
+        outState.putInt("SeekBarGreen", sb3.getProgress());
+    }
  
+    /*
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
-        mFragment = new SeekBarFragment();
-        // Attach fragment1.xml layout
+    	mFragment = new SeekBarFragment();
         ft.replace(android.R.id.content, mFragment);
         ft.attach(mFragment);
     }
@@ -133,12 +148,14 @@ public class SeekBarFragment extends Fragment implements ActionBar.TabListener, 
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
         // TODO Auto-generated method stub
         // Remove fragment1.xml layout
-        ft.remove(mFragment);
+    	ft.remove(mFragment);
+    	// ft.remove(this);
     }
  
     public void onTabReselected(Tab tab, FragmentTransaction ft) {
         // TODO Auto-generated method stub
     }
+    */
     
     protected void updateBackground()
     {

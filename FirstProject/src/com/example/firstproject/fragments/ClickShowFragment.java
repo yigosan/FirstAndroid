@@ -13,7 +13,7 @@ import android.widget.ImageView;
 
 import com.example.firstproject.R;
 
-public class ClickShowFragment extends Fragment implements ActionBar.TabListener {
+public class ClickShowFragment extends Fragment { //implements ActionBar.TabListener {
 
 	ImageView imv1 = null;
 	ImageView imv2 = null;
@@ -63,7 +63,7 @@ public class ClickShowFragment extends Fragment implements ActionBar.TabListener
 		// TODO Auto-generated constructor stub
 	}
 
-
+/*
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
         // TODO Auto-generated method stub
     	mFragment = new ClickShowFragment();
@@ -82,5 +82,5 @@ public class ClickShowFragment extends Fragment implements ActionBar.TabListener
         // TODO Auto-generated method stub
  
     }
-
+*/
 }

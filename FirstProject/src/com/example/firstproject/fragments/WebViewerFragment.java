@@ -19,7 +19,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.net.Uri;
 
-public class WebViewerFragment  extends Fragment implements ActionBar.TabListener  {
+public class WebViewerFragment  extends Fragment { // implements ActionBar.TabListener  {
 
 	Button btn3 = null;
 	TextView txturl = null;
@@ -73,6 +73,7 @@ public class WebViewerFragment  extends Fragment implements ActionBar.TabListene
 		// TODO Auto-generated constructor stub
 	}
 
+	/*
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
         // TODO Auto-generated method stub
         mFragment = new WebViewerFragment();
@@ -91,5 +92,7 @@ public class WebViewerFragment  extends Fragment implements ActionBar.TabListene
         // TODO Auto-generated method stub
  
     }
+    
+    */
 
 }

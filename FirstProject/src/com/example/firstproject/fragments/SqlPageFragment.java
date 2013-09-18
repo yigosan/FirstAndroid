@@ -21,7 +21,7 @@ import com.example.firstproject.database.DataAccess;
 import com.example.firstproject.view.PersonListView;
 import com.example.firstproject.vo.Person;
 
-public class SqlPageFragment extends android.app.Fragment implements ActionBar.TabListener {
+public class SqlPageFragment extends android.app.Fragment { //implements ActionBar.TabListener {
 
 	private Fragment mFragment;
 	EditText txtName;
@@ -117,7 +117,7 @@ public class SqlPageFragment extends android.app.Fragment implements ActionBar.T
     	
     	return v;
     }
-    
+    /*
    
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
         // TODO Auto-generated method stub
@@ -137,5 +137,7 @@ public class SqlPageFragment extends android.app.Fragment implements ActionBar.T
         // TODO Auto-generated method stub
  
     }
+    
+    */
 
 }
