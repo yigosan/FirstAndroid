@@ -21,7 +21,7 @@ import com.example.firstproject.database.DataAccess;
 import com.example.firstproject.view.PersonListView;
 import com.example.firstproject.vo.Person;
 
-public class SqlPageFragment extends Fragment implements ActionBar.TabListener {
+public class SqlPageFragment extends android.app.Fragment implements ActionBar.TabListener {
 
 	private Fragment mFragment;
 	EditText txtName;
@@ -41,9 +41,10 @@ public class SqlPageFragment extends Fragment implements ActionBar.TabListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-     
+    
     @Override
-    public View onViewCreate(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+     
         View v = inflater.inflate(R.layout.sqlpage, container, false);
     	
        

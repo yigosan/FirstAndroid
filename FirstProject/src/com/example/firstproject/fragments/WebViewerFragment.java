@@ -1,25 +1,28 @@
 package com.example.firstproject.fragments;
 
+import com.example.firstproject.R;
+import com.example.firstproject.WebDisplay;
+import com.example.firstproject.variables.Degiskenler;
+
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.example.firstproject.R;
+public class WebViewerFragment  extends Fragment implements ActionBar.TabListener  {
 
-public class ClickShowFragment extends Fragment implements ActionBar.TabListener {
-
-	ImageView imv1 = null;
-	ImageView imv2 = null;
-	Button btn2 = null;
+	Button btn3 = null;
+	TextView txturl = null;
 	
-    private Fragment mFragment;
+private Fragment mFragment;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,44 +31,34 @@ public class ClickShowFragment extends Fragment implements ActionBar.TabListener
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.clicklayout, container, false);
-     
-        imv1 = (ImageView)v.findViewById(R.id.imageView1);
-        imv2 = (ImageView)v.findViewById(R.id.imageView2);
-        btn2 = (Button)v.findViewById(R.id.button2);
-        imv1.setVisibility(View.INVISIBLE);
-        imv2.setVisibility(View.INVISIBLE);
-        
-        imv1.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				imv2.setVisibility(View.VISIBLE);
-			}
-		});
-        
-        btn2.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				imv1.setImageResource(R.drawable.sinyal);
-				imv1.setVisibility(View.VISIBLE);
-			}
-		});
-        
+
+    	View v = inflater.inflate(R.layout.webviewer, container, false);
+        txturl = (TextView)v.findViewById(R.id.txtUrl);
+        btn3 = (Button)v.findViewById(R.id.button3);
+        btn3.setOnClickListener(new View.OnClickListener() {
+        final Context c = getActivity().getApplicationContext();
+    		@Override
+    		public void onClick(View v) {
+    			// TODO Auto-generated method stub
+    			String url = txturl.getText().toString();
+    			Intent i = new Intent();
+    			i.putExtra(Degiskenler.URL, url);
+    			i.setClass(c, WebDisplay.class);
+    			startActivity(i);
+    		}
+    	});
         return v;
     }
+
+    
 	
-	public ClickShowFragment() {
+	public WebViewerFragment() {
 		// TODO Auto-generated constructor stub
 	}
 
-
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
         // TODO Auto-generated method stub
-    	mFragment = new ClickShowFragment();
+        mFragment = new WebViewerFragment();
         // Attach fragment1.xml layout
         ft.add(android.R.id.content, mFragment);
         ft.attach(mFragment);
