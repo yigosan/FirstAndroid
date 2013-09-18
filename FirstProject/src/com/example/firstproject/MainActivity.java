@@ -1,5 +1,7 @@
 package com.example.firstproject;
 
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,56 +10,66 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.firstproject.fragments.SeekBarFragment;
+import com.example.firstproject.fragments.SqlPageFragment;
 import com.example.firstproject.variables.Degiskenler;
 
-public class MainActivity extends Activity implements IColorProvider{
+public class MainActivity extends Activity {
 
-	SeekBar sb1 = null;
-	SeekBar sb2 = null;
-	SeekBar sb3 = null;
-	RelativeLayout rl1 = null;
-	int _red = 0;
-	int _blue = 0;
-	int _green =0;
 	ImageView imv1 = null;
 	ImageView imv2 = null;
 	Button btn1 = null;
 	Button btn2 = null;
 	Button btn3 = null;
-	Button btn4 = null;
 	TextView txturl = null;
+	
+	Tab tab;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        sb1 = (SeekBar)findViewById(R.id.seekBar1);
-        sb2 = (SeekBar)findViewById(R.id.seekBar2);
-        sb3 = (SeekBar)findViewById(R.id.seekBar3);
-        rl1 = (RelativeLayout)findViewById(R.id.background);
+        ActionBar actionBar = getActionBar();
+        // Hide Actionbar Icon
+        actionBar.setDisplayShowHomeEnabled(false);
+        // Hide Actionbar Title
+        actionBar.setDisplayShowTitleEnabled(false);
+        // Create Actionbar Tabs
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+ 
+        // Create first Tab
+        tab = actionBar.newTab().setTabListener(new SeekBarFragment());
+        // Create your own custom icon
+        tab.setIcon(R.drawable.tab);
+        actionBar.addTab(tab);
+ 
+        // Create Second Tab
+        tab = actionBar.newTab().setTabListener(new SqlPageFragment());
+        // Set Tab Title
+        tab.setText("Tab2");
+        actionBar.addTab(tab);
+ 
+        /*
+        // Create Third Tab
+        tab = actionBar.newTab().setTabListener(new FragmentTab3());
+        // Set Tab Title
+        tab.setText("Tab3");
+        actionBar.addTab(tab);
+        */
+        
         imv1 = (ImageView)findViewById(R.id.imageView1);
         imv2 = (ImageView)findViewById(R.id.imageView2);
         btn1 = (Button)findViewById(R.id.button1);
         btn2 = (Button)findViewById(R.id.button2);
         btn3 = (Button)findViewById(R.id.button3);
-        btn4 = (Button)findViewById(R.id.button4);
         imv1.setVisibility(View.INVISIBLE);
         imv2.setVisibility(View.INVISIBLE);
         txturl = (TextView)findViewById(R.id.txtUrl);
         
-        btn4.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				startActivity(new Intent(getApplicationContext(),SqlPage.class));
-			}
-		});
+       
         btn3.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -104,109 +116,9 @@ public class MainActivity extends Activity implements IColorProvider{
 		});
         
 		
-        sb1.setOnSeekBarChangeListener(new OnSeekBarChangeListener_withReference(this) {
-			 
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress,
-					boolean fromUser) {
-				// TODO Auto-generated method stub
-				sb1.setMax(255);
-				this._colorProvider.setRed(progress);
-				
-			}
-		});
-        
-        sb2.setOnSeekBarChangeListener(new OnSeekBarChangeListener_withReference(this) {
-			 
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress,
-					boolean fromUser) {
-				// TODO Auto-generated method stub
-				sb2.setMax(255);
-				this._colorProvider.setBlue(progress);
-				
-			}
-		});
-        
-        sb3.setOnSeekBarChangeListener(new OnSeekBarChangeListener_withReference(this) {
-			 
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress,
-					boolean fromUser) {
-				// TODO Auto-generated method stub
-				sb3.setMax(255);
-				this._colorProvider.setGreen(progress);
-				
-			}
-		});
+       
         
         // little dummy note
     }
 
-    protected void updateBackground()
-    {
-    	int oran = android.graphics.Color.rgb(this._red, this._green, this._blue);
-    	rl1.setBackgroundColor(oran);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-    	super.onCreateOptionsMenu(menu);    	
-        getMenuInflater().inflate(R.menu.mymenu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-    
-	public int getRed(){return this._red;}
-	public void setRed(int val) {this._red = val;this.updateBackground();}
-	public int getBlue(){return this._blue;}
-	public void setBlue(int val){this._blue = val;this.updateBackground();}
-	public int getGreen(){return this._green;}
-	public void setGreen(int val){this._green = val;this.updateBackground();}
-    
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
-		switch(item.getItemId())
-		{
-			case R.id.menuitem1 : System.exit(0); return true;
-			case R.id.menuitem2 : startActivity(new Intent(getApplicationContext(),SqlPage.class)); return true;
-		}
-		return false;
-	}
 }

@@ -14,6 +14,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
         <activity
             android:name="com.example.firstproject.MainActivity"
             android:label="@string/app_name" >
@@ -53,6 +54,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        
+		<activity
+            android:name="com.example.firstproject.TabHostPage"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.TABBEDPAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+                                                            
     </application>
 
 </manifest>

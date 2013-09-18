@@ -1,23 +1,29 @@
-package com.example.firstproject;
+package com.example.firstproject.fragments;
 
 import java.util.List;
 
-import android.app.Activity;
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.example.firstproject.R;
 import com.example.firstproject.database.DataAccess;
 import com.example.firstproject.view.PersonListView;
 import com.example.firstproject.vo.Person;
 
-public class SqlPage extends Activity {
+public class SqlPageFragment extends Fragment implements ActionBar.TabListener {
 
+	private Fragment mFragment;
 	EditText txtName;
 	EditText txtSurname;
 	Button btnInsert;
@@ -26,29 +32,30 @@ public class SqlPage extends Activity {
 	Button btnDeleteFirstName;
 	ListView lstShow;
 	DataAccess dbaccess;
-	
-	public SqlPage() {
+
+	public SqlPageFragment(){
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Person GetPerson()
-	{
-		return new Person(txtName.getText().toString(), txtSurname.getText().toString());
-	}
-	
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sqlpage);
-        
-    	txtName = (EditText)findViewById(R.id.editText1);
-    	txtSurname = (EditText)findViewById(R.id.editText02);
-    	btnInsert = (Button)findViewById(R.id.button1);
-    	btnSelect = (Button)findViewById(R.id.button2);
-    	btnUpdateFirstName = (Button)findViewById(R.id.button3);
-    	btnDeleteFirstName = (Button)findViewById(R.id.button4);
-    	lstShow = (ListView)findViewById(R.id.listView1);
-    	dbaccess = new DataAccess(this);
+    }
+     
+    @Override
+    public View onViewCreate(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.sqlpage, container, false);
+    	
+       
+    	txtName = (EditText)v.findViewById(R.id.editText1);
+    	txtSurname = (EditText)v.findViewById(R.id.editText02);
+    	btnInsert = (Button)v.findViewById(R.id.button1);
+    	btnSelect = (Button)v.findViewById(R.id.button2);
+    	btnUpdateFirstName = (Button)v.findViewById(R.id.button3);
+    	btnDeleteFirstName = (Button)v.findViewById(R.id.button4);
+    	lstShow = (ListView)v.findViewById(R.id.listView1);
+    	dbaccess = new DataAccess(this.getActivity());
+    	final Context c = this.getActivity().getApplicationContext();
     	
     	btnDeleteFirstName.setOnClickListener(new View.OnClickListener() {
 			
@@ -88,7 +95,7 @@ public class SqlPage extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				List<Person> people = Person.DBSelect(dbaccess);
-				PersonListView personadapter = new PersonListView(getApplicationContext(),R.layout.personlayout,people);
+				PersonListView personadapter = new PersonListView(c,R.layout.personlayout,people);
 				lstShow.setAdapter(personadapter);
 				lstShow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -105,6 +112,28 @@ public class SqlPage extends Activity {
 				});
 			}
 		});
+    	
+    	return v;
+    }
+    
+   
+    public void onTabSelected(Tab tab, FragmentTransaction ft) {
+        // TODO Auto-generated method stub
+        mFragment = new SqlPageFragment();
+        // Attach fragment1.xml layout
+        ft.add(android.R.id.content, mFragment);
+        ft.attach(mFragment);
+    }
+ 
+    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+        // TODO Auto-generated method stub
+        // Remove fragment1.xml layout
+        ft.remove(mFragment);
+    }
+ 
+    public void onTabReselected(Tab tab, FragmentTransaction ft) {
+        // TODO Auto-generated method stub
+ 
     }
 
 }
