@@ -24,6 +24,7 @@ public class ClickShowFragment extends Fragment implements ActionBar.TabListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
     
     @Override
@@ -67,7 +68,7 @@ public class ClickShowFragment extends Fragment implements ActionBar.TabListener
         // TODO Auto-generated method stub
     	mFragment = new ClickShowFragment();
         // Attach fragment1.xml layout
-        ft.add(android.R.id.content, mFragment);
+        ft.replace(android.R.id.content, mFragment);
         ft.attach(mFragment);
     }
  

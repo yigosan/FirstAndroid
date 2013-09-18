@@ -16,13 +16,16 @@
         <requestFocus />
     </EditText>
 
+        <CheckBox
+            android:id="@+id/chbUseBrowser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Use Browser" />
+
         <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/txtUrl"
-        android:layout_alignBottom="@+id/txtUrl"
-        android:layout_toRightOf="@+id/txtUrl"
-        android:text="Web" />
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Web" />
     
 </LinearLayout>

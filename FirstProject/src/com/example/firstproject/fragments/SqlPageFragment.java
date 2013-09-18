@@ -40,6 +40,7 @@ public class SqlPageFragment extends android.app.Fragment implements ActionBar.T
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
     
     @Override
@@ -120,9 +121,9 @@ public class SqlPageFragment extends android.app.Fragment implements ActionBar.T
    
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
         // TODO Auto-generated method stub
-        mFragment = new SqlPageFragment();
+        mFragment =  new SqlPageFragment();
         // Attach fragment1.xml layout
-        ft.add(android.R.id.content, mFragment);
+        ft.replace(android.R.id.content, mFragment);
         ft.attach(mFragment);
     }
  

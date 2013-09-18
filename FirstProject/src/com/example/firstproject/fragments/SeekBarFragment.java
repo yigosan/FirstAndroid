@@ -36,6 +36,7 @@ public class SeekBarFragment extends Fragment implements ActionBar.TabListener, 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
     
     @Override
@@ -125,7 +126,7 @@ public class SeekBarFragment extends Fragment implements ActionBar.TabListener, 
         // TODO Auto-generated method stub
         mFragment = new SeekBarFragment();
         // Attach fragment1.xml layout
-        ft.add(android.R.id.content, mFragment);
+        ft.replace(android.R.id.content, mFragment);
         ft.attach(mFragment);
     }
  
@@ -137,7 +138,6 @@ public class SeekBarFragment extends Fragment implements ActionBar.TabListener, 
  
     public void onTabReselected(Tab tab, FragmentTransaction ft) {
         // TODO Auto-generated method stub
- 
     }
     
     protected void updateBackground()
