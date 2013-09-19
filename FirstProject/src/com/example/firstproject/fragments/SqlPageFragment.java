@@ -32,6 +32,7 @@ public class SqlPageFragment extends android.app.Fragment { //implements ActionB
 	Button btnDeleteFirstName;
 	ListView lstShow;
 	DataAccess dbaccess;
+	View mMyView;
 
 	public SqlPageFragment(){
 		// TODO Auto-generated constructor stub
@@ -46,76 +47,79 @@ public class SqlPageFragment extends android.app.Fragment { //implements ActionB
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
      
-        View v = inflater.inflate(R.layout.sqlpage, container, false);
+    	if (mMyView == null) {
+    		mMyView = inflater.inflate(R.layout.sqlpage, container, false);
     	
-       
-    	txtName = (EditText)v.findViewById(R.id.editText1);
-    	txtSurname = (EditText)v.findViewById(R.id.editText02);
-    	btnInsert = (Button)v.findViewById(R.id.button1);
-    	btnSelect = (Button)v.findViewById(R.id.button2);
-    	btnUpdateFirstName = (Button)v.findViewById(R.id.button3);
-    	btnDeleteFirstName = (Button)v.findViewById(R.id.button4);
-    	lstShow = (ListView)v.findViewById(R.id.listView1);
-    	dbaccess = new DataAccess(this.getActivity());
-    	final Context c = this.getActivity().getApplicationContext();
-    	
-    	btnDeleteFirstName.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Person.DBDelete(dbaccess, txtName.getText().toString());
-			}
-		});
-    	
-    	btnUpdateFirstName.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Person newPerson = Person.DBUpdate(dbaccess, new Person(txtName.getText().toString(), txtSurname.getText().toString()));
-				if(null != newPerson)
-				{
-					txtName.setText(newPerson.getName());
-					txtSurname.setText(newPerson.getSurname());
+	    	txtName = (EditText)mMyView.findViewById(R.id.editText1);
+	    	txtSurname = (EditText)mMyView.findViewById(R.id.editText02);
+	    	btnInsert = (Button)mMyView.findViewById(R.id.button1);
+	    	btnSelect = (Button)mMyView.findViewById(R.id.button2);
+	    	btnUpdateFirstName = (Button)mMyView.findViewById(R.id.button3);
+	    	btnDeleteFirstName = (Button)mMyView.findViewById(R.id.button4);
+	    	lstShow = (ListView)mMyView.findViewById(R.id.listView1);
+	    	dbaccess = new DataAccess(this.getActivity());
+	    	final Context c = this.getActivity().getApplicationContext();
+	    	
+	    	btnDeleteFirstName.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Person.DBDelete(dbaccess, txtName.getText().toString());
 				}
-			}
-		});
-    	
-    	btnInsert.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Person.DBInsert(dbaccess,new Person(txtName.getText().toString(), txtSurname.getText().toString()));
-			}
-		});
-    	
-    	btnSelect.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				List<Person> people = Person.DBSelect(dbaccess);
-				PersonListView personadapter = new PersonListView(c,R.layout.personlayout,people);
-				lstShow.setAdapter(personadapter);
-				lstShow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-					@Override
-					public void onItemClick(AdapterView<?> arg0, View arg1,
-							int position, long id) {
-						Person person = (Person)arg0.getAdapter().getItem(position);
-						if(null != person)
-						{
-							txtName.setText(person.getName());
-							txtSurname.setText(person.getSurname());
-						}
+			});
+	    	
+	    	btnUpdateFirstName.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Person newPerson = Person.DBUpdate(dbaccess, new Person(txtName.getText().toString(), txtSurname.getText().toString()));
+					if(null != newPerson)
+					{
+						txtName.setText(newPerson.getName());
+						txtSurname.setText(newPerson.getSurname());
 					}
-				});
-			}
-		});
-    	
-    	return v;
+				}
+			});
+	    	
+	    	btnInsert.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Person.DBInsert(dbaccess,new Person(txtName.getText().toString(), txtSurname.getText().toString()));
+				}
+			});
+	    	
+	    	btnSelect.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					List<Person> people = Person.DBSelect(dbaccess);
+					PersonListView personadapter = new PersonListView(c,R.layout.personlayout,people);
+					lstShow.setAdapter(personadapter);
+					lstShow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+	
+						@Override
+						public void onItemClick(AdapterView<?> arg0, View arg1,
+								int position, long id) {
+							Person person = (Person)arg0.getAdapter().getItem(position);
+							if(null != person)
+							{
+								txtName.setText(person.getName());
+								txtSurname.setText(person.getSurname());
+							}
+						}
+					});
+				}
+			});
+        } else {
+            container.removeView(mMyView);
+        }
+
+    	return mMyView;
     }
     /*
    

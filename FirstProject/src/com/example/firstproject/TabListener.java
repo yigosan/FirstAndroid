@@ -24,19 +24,27 @@ import android.app.FragmentTransaction;
    }  
    /* The following are each of the ActionBar.TabListener callbacks */  
    public void onTabSelected(Tab tab, FragmentTransaction ft) {  
-     // Check if the fragment is already initialized  
-	 FragmentManager fm = mActivity.getFragmentManager();
-	 Fragment prevFragment = fm.findFragmentByTag(mTag);
-	 
-	 if (mFragment == null) {  
-       // If not, instantiate and add it to the activity  
-       mFragment = Fragment.instantiate(mActivity, mClass.getName());
-       ft.replace(android.R.id.content, mFragment, mTag);  
-     }
-	 else {  
-       // If it exists, simply attach it in order to show it  
-       ft.attach(mFragment);  
-     }  
+	   
+	    mFragment = mActivity.getFragmentManager().findFragmentByTag(mTag);   // add this
+
+	    if (mFragment == null){ // check to see if the fragment has already been initialized. If not create a new one. 
+	        mFragment = Fragment.instantiate(mActivity, mClass.getName()); 
+	        ft.add(android.R.id.content,mFragment,mTag); 
+	    } else { 
+	        ft.attach(mFragment); // if the fragment has been initialized attach it to the current activity 
+	    }
+	    
+	    /*
+	    mFragment = mActivity.getSupportFragmentManager().findFragmentByTag(mTag);   // add this
+    	if (mFragment == null){ // check to see if the fragment has already been initialized. If not create a new one. 
+        	mFragment = android.support.v4.app.Fragment.instantiate(mActivity, mClass.getName()); 
+        	ft.add(android.R.id.content,mFragment,mTag); 
+    	} else { 
+        	ft.attach(mFragment); // if the fragment has been initialized attach it to the current activity 
+    	} 
+	      
+	     */
+
    }  
    public void onTabUnselected(Tab tab, FragmentTransaction ft) {  
      if (mFragment != null) {  

@@ -27,35 +27,7 @@ public class MainActivity extends Activity {
         actionBar.setDisplayShowTitleEnabled(false);
         // Create Actionbar Tabs
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
- 
-        /*
-        // Create first Tab
-        tab = actionBar.newTab().setTabListener(new SeekBarFragment()));
-        // Create your own custom icon
-        //tab.setIcon(R.drawable.tab);
-        tab.setText("SeekBar");
-        tab.setTag("SeekBar");
-        actionBar.addTab(tab);
-        
-        // Create Second Tab
-        tab = actionBar.newTab().setTabListener(new SqlPageFragment());
-        // Set Tab Title
-        tab.setText("Sql");
-        actionBar.addTab(tab);
- 
-        // Create Third Tab
-        tab = actionBar.newTab().setTabListener(new ClickShowFragment());
-        // Set Tab Title
-        tab.setText("Click");
-        actionBar.addTab(tab);
-        
-        // Create Third Tab
-        tab = actionBar.newTab().setTabListener(new WebViewerFragment());
-        // Set Tab Title
-        tab.setText("Web");
-        actionBar.addTab(tab);
-      
-      */
+
         
         tab = actionBar.newTab();
         tab.setText("SeekBar");
@@ -80,6 +52,32 @@ public class MainActivity extends Activity {
         tab.setTabListener(new TabListener<WebViewerFragment>(this, "tab4",WebViewerFragment.class));
         actionBar.addTab(tab);
       
+        /*
+
+        tab = actionBar.newTab();
+        tab.setText("SeekBar");
+        tab.setTabListener(new TabListener<SeekBarFragment>(this, "tab1", null));
+        actionBar.addTab(tab);
+        
+        // Create Second Tab
+        tab = actionBar.newTab();
+        tab.setText("Sql");
+        tab.setTabListener(new TabListener<SqlPageFragment>(this, "tab2", null));
+        actionBar.addTab(tab);
+ 
+        // Create Third Tab
+        tab = actionBar.newTab();
+        tab.setText("Click");
+        tab.setTabListener(new TabListener<ClickShowFragment>(this, "tab3", null));
+        actionBar.addTab(tab);
+        
+        // Create Third Tab
+        tab = actionBar.newTab();
+        tab.setText("Web");
+        tab.setTabListener(new TabListener<WebViewerFragment>(this, "tab4",null));
+        actionBar.addTab(tab);
+        
+        */
         
         // check if there is a saved state to select active tab  
         if (savedInstanceState != null) {  
