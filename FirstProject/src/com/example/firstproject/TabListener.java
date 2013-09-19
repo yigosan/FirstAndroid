@@ -11,7 +11,9 @@ import android.app.FragmentTransaction;
    private Fragment mFragment;  
    private final Activity mActivity;  
    private final String mTag;  
-   private final Class<T> mClass;  
+   private final Class<T> mClass;
+   private final String mClassName;
+   
    /** Constructor used each time a new tab is created.  
     * @param activity The host Activity, used to instantiate the fragment  
     * @param tag The identifier tag for the fragment  
@@ -20,21 +22,31 @@ import android.app.FragmentTransaction;
    public TabListener(Activity activity, String tag, Class<T> clz) {  
      mActivity = activity;  
      mTag = tag;  
-     mClass = clz;  
-   }  
+     mClass = clz;
+     mClassName = "";  
+   }
+   
+   public TabListener(Activity activity, String tag, String className) {  
+	     mActivity = activity;  
+	     mTag = tag;
+	     mClass = null;
+	     mClassName = className;  
+	   }  
    /* The following are each of the ActionBar.TabListener callbacks */  
    public void onTabSelected(Tab tab, FragmentTransaction ft) {  
 	   
 	    mFragment = mActivity.getFragmentManager().findFragmentByTag(mTag);   // add this
 
 	    if (mFragment == null){ // check to see if the fragment has already been initialized. If not create a new one. 
-	        mFragment = Fragment.instantiate(mActivity, mClass.getName()); 
+	        mFragment = Fragment.instantiate(mActivity, this.getClassName()); 
 	        ft.add(android.R.id.content,mFragment,mTag); 
 	    } else { 
 	        ft.attach(mFragment); // if the fragment has been initialized attach it to the current activity 
 	    }
 	    
 	    /*
+	     *  Below is for the Sherlock implementation for compatibility with earlier Frameworks
+	     *  
 	    mFragment = mActivity.getSupportFragmentManager().findFragmentByTag(mTag);   // add this
     	if (mFragment == null){ // check to see if the fragment has already been initialized. If not create a new one. 
         	mFragment = android.support.v4.app.Fragment.instantiate(mActivity, mClass.getName()); 
@@ -55,4 +67,12 @@ import android.app.FragmentTransaction;
    public void onTabReselected(Tab tab, FragmentTransaction ft) {  
      // User selected the already selected tab. Usually do nothing.  
    }  
+   
+   private String getClassName()
+   {
+	   if(null == this.mClass)
+		   return this.mClassName;
+	   else 
+		   return this.mClass.getName();
+   }
  }  

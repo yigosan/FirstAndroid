@@ -1,9 +1,10 @@
 package com.example.firstproject;
 
+import java.lang.reflect.Type;
+
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 
 import com.example.firstproject.fragments.ClickShowFragment;
@@ -27,11 +28,11 @@ public class MainActivity extends Activity {
         actionBar.setDisplayShowTitleEnabled(false);
         // Create Actionbar Tabs
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        System.out.println("**********************" + SeekBarFragment.class.getName());
 
-        
         tab = actionBar.newTab();
         tab.setText("SeekBar");
-        tab.setTabListener(new TabListener<SeekBarFragment>(this, "tab1",SeekBarFragment.class));
+        tab.setTabListener(new TabListener<SeekBarFragment>(this, "tab1","com.example.firstproject.fragments.SeekBarFragment"));
         actionBar.addTab(tab);
         
         // Create Second Tab

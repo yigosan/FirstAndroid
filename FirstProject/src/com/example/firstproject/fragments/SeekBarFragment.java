@@ -137,25 +137,6 @@ public class SeekBarFragment extends Fragment implements IColorProvider { //impl
         outState.putInt("SeekBarBlue", sb2.getProgress());
         outState.putInt("SeekBarGreen", sb3.getProgress());
     }
- 
-    /*
-    public void onTabSelected(Tab tab, FragmentTransaction ft) {
-    	mFragment = new SeekBarFragment();
-        ft.replace(android.R.id.content, mFragment);
-        ft.attach(mFragment);
-    }
- 
-    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
-        // Remove fragment1.xml layout
-    	ft.remove(mFragment);
-    	// ft.remove(this);
-    }
- 
-    public void onTabReselected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
-    }
-    */
     
     protected void updateBackground()
     {

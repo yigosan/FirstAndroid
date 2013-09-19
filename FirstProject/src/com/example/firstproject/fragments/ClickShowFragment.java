@@ -17,6 +17,10 @@ public class ClickShowFragment extends Fragment {
 	Button btn2 = null;
 	View mMyView = null;
 	
+	public ClickShowFragment() {
+		// TODO Auto-generated constructor stub
+	}
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +64,4 @@ public class ClickShowFragment extends Fragment {
         return mMyView;
     }
 	
-	public ClickShowFragment() {
-		// TODO Auto-generated constructor stub
-	}
-
 }

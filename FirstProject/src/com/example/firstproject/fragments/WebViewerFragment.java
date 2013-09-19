@@ -24,10 +24,12 @@ public class WebViewerFragment  extends Fragment { // implements ActionBar.TabLi
 	Button btn3 = null;
 	TextView txturl = null;
 	CheckBox chbbrowser = null;
+
+	public WebViewerFragment() {
+		// TODO Auto-generated constructor stub
+	}
 	
-	private Fragment mFragment;
-    
-    @Override
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
@@ -66,33 +68,5 @@ public class WebViewerFragment  extends Fragment { // implements ActionBar.TabLi
     	});
         return v;
     }
-
-    
-	
-	public WebViewerFragment() {
-		// TODO Auto-generated constructor stub
-	}
-
-	/*
-    public void onTabSelected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
-        mFragment = new WebViewerFragment();
-        // Attach fragment1.xml layout
-        ft.replace(android.R.id.content, mFragment);
-        ft.attach(mFragment);
-    }
- 
-    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
-        // Remove fragment1.xml layout
-        ft.remove(mFragment);
-    }
- 
-    public void onTabReselected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
- 
-    }
-    
-    */
 
 }

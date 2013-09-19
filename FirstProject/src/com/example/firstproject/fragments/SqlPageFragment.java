@@ -23,7 +23,6 @@ import com.example.firstproject.vo.Person;
 
 public class SqlPageFragment extends android.app.Fragment { //implements ActionBar.TabListener {
 
-	private Fragment mFragment;
 	EditText txtName;
 	EditText txtSurname;
 	Button btnInsert;
@@ -37,6 +36,7 @@ public class SqlPageFragment extends android.app.Fragment { //implements ActionB
 	public SqlPageFragment(){
 		// TODO Auto-generated constructor stub
 	}
+	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -121,27 +121,4 @@ public class SqlPageFragment extends android.app.Fragment { //implements ActionB
 
     	return mMyView;
     }
-    /*
-   
-    public void onTabSelected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
-        mFragment =  new SqlPageFragment();
-        // Attach fragment1.xml layout
-        ft.replace(android.R.id.content, mFragment);
-        ft.attach(mFragment);
-    }
- 
-    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
-        // Remove fragment1.xml layout
-        ft.remove(mFragment);
-    }
- 
-    public void onTabReselected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
- 
-    }
-    
-    */
-
 }
