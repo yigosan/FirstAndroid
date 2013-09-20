@@ -8,8 +8,10 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.example.firstproject.fragments.ClickShowFragment;
+import com.example.firstproject.fragments.PictureGaleryFragment;
 import com.example.firstproject.fragments.SeekBarFragment;
 import com.example.firstproject.fragments.SqlPageFragment;
+import com.example.firstproject.fragments.WebServiceFragment;
 import com.example.firstproject.fragments.WebViewerFragment;
 
 public class MainActivity extends Activity {
@@ -19,6 +21,8 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+                
         setContentView(R.layout.activity_main);
         
         ActionBar actionBar = getActionBar();
@@ -53,6 +57,18 @@ public class MainActivity extends Activity {
         tab.setTabListener(new TabListener<WebViewerFragment>(this, "tab4",WebViewerFragment.class));
         actionBar.addTab(tab);
       
+        // Create Fourth Tab
+        tab = actionBar.newTab();
+        tab.setText("Gallery");
+        tab.setTabListener(new TabListener<PictureGaleryFragment>(this, "tab5",PictureGaleryFragment.class));
+        actionBar.addTab(tab);
+        
+        // Create Fifth Tab
+        tab = actionBar.newTab();
+        tab.setText("WebService");
+        tab.setTabListener(new TabListener<WebServiceFragment>(this, "tab6", WebServiceFragment.class));
+        actionBar.addTab(tab);
+        
         /*
 
         tab = actionBar.newTab();

@@ -43,28 +43,28 @@ public class WebViewerFragment  extends Fragment { // implements ActionBar.TabLi
         btn3 = (Button)v.findViewById(R.id.button3);
         chbbrowser = (CheckBox)v.findViewById(R.id.chbUseBrowser);
         final boolean useinternal = chbbrowser.isChecked();
-        btn3.setOnClickListener(new View.OnClickListener() {
         final Context c = getActivity().getApplicationContext();
-    		@Override
-    		public void onClick(View v) {
-    			// TODO Auto-generated method stub
-    			String url = txturl.getText().toString();
-    			if(!url.toLowerCase().startsWith("http://")) url = "http://" + url;
-    			// This will not work, chbbrowser check is done at load time, but click will happen afterwards.
-    			// We need an interface to get chbbrowser status at the time of click.
-    			if(useinternal)
-    			{
-	    			Intent i = new Intent();
-	    			i.putExtra(Degiskenler.URL, url);
-	    			i.setClass(c, WebDisplay.class);
-	    			startActivity(i);
-    			}else
-    			{
-    				Uri site = Uri.parse(url);
-    				Intent i2 = new Intent(Intent.ACTION_VIEW,site);
-    				startActivity(i2);
-    			}
-    		}
+        btn3.setOnClickListener(new View.OnClickListener() {
+        	@Override
+        	public void onClick(View v) {
+			// TODO Auto-generated method stub
+        		String url = txturl.getText().toString();
+        		if(!url.toLowerCase().startsWith("http://")) url = "http://" + url;
+        		// This will not work, chbbrowser check is done at load time, but click will happen afterwards.
+        		// We need an interface to get chbbrowser status at the time of click (Like in SqlPageFragment example.
+        		if(useinternal)
+        		{
+        			Intent i = new Intent();
+        			i.putExtra(Degiskenler.URL, url);
+        			i.setClass(c, WebDisplay.class);
+        			startActivity(i);
+        		}else
+        		{
+        			Uri site = Uri.parse(url);
+        			Intent i2 = new Intent(Intent.ACTION_VIEW,site);
+        			startActivity(i2);
+        		}
+        	}
     	});
         return v;
     }
