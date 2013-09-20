@@ -3,8 +3,8 @@ package com.example.firstproject;
 import java.io.IOException;
 
 import org.ksoap2.SoapEnvelope;
+import org.ksoap2.SoapFault;
 import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
@@ -15,22 +15,19 @@ import android.widget.Toast;
 
 public class WebServiceWrapper<T> extends AsyncTask<Void,Void,T> {
 
-	protected Context mC;
 	protected String mSoap_Action;
 	protected String mMethod_Name;
 	protected String mNamespace;
 	protected String mUrl;
 	protected SoapSerializationEnvelope mSoapEnv;
 	protected SoapObject mRequest;
-	protected HttpTransportSE androidHttpTransport;
-	protected T t;
+	protected HttpTransportSE mAndroidHttpTransport;
 	
-	public WebServiceWrapper(Context c,String soapAction, String methodName, String namespace, String url) {
-		this(c, soapAction, methodName, namespace,url,true,SoapEnvelope.VER11,true);
+	public WebServiceWrapper(String soapAction, String methodName, String namespace, String url) {
+		this(soapAction, methodName, namespace,url,true,SoapEnvelope.VER11,true);
 	}
 	
-	public WebServiceWrapper(Context c, String soapAction, String methodName, String namespace, String url, boolean isDotNet, int soapEnvelopeVersion, boolean debug) {
-		this.mC = c;
+	public WebServiceWrapper(String soapAction, String methodName, String namespace, String url, boolean isDotNet, int soapEnvelopeVersion, boolean debug) {
 		this.mSoap_Action = soapAction;
 		this.mMethod_Name = methodName;
 		this.mNamespace = namespace;
@@ -38,9 +35,9 @@ public class WebServiceWrapper<T> extends AsyncTask<Void,Void,T> {
 		this.mSoapEnv = new SoapSerializationEnvelope(soapEnvelopeVersion);
 		this.mSoapEnv.dotNet = isDotNet;
 		this.mRequest = new SoapObject(this.mNamespace, this.mMethod_Name);
-		mSoapEnv.setOutputSoapObject(this.mRequest);
-		androidHttpTransport = new HttpTransportSE(this.mUrl);
-		androidHttpTransport.debug = debug;
+		this.mSoapEnv.setOutputSoapObject(this.mRequest);
+		this.mAndroidHttpTransport = new HttpTransportSE(this.mUrl);
+		this.mAndroidHttpTransport.debug = debug;
 	}
 	
 	public String getSoapAction(){return this.mSoap_Action;};
@@ -51,13 +48,12 @@ public class WebServiceWrapper<T> extends AsyncTask<Void,Void,T> {
 	public SoapObject getRequest(){return this.mRequest;}
 
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected T doInBackground(Void... params) {
+		T tt = null;
 		try {
-			this.androidHttpTransport.call(this.mSoap_Action, this.mSoapEnv);
-			SoapPrimitive sp = (SoapPrimitive)this.mSoapEnv.getResponse();
-			t = (T)sp;
+			this.mAndroidHttpTransport.call(this.mSoap_Action, this.mSoapEnv);
+			tt = (T)this.mSoapEnv.getResponse();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,14 +63,7 @@ public class WebServiceWrapper<T> extends AsyncTask<Void,Void,T> {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		return t;
+		return tt;
 	}
-	   @Override
-	   protected void onPostExecute(T result) {
-		   if(t != null)
-			   Toast.makeText(this.mC, t.toString(), Toast.LENGTH_LONG).show();
-		   else
-			   Toast.makeText(this.mC, "Sonuc gelmedi", Toast.LENGTH_LONG).show();
-	    }
-	
+
 }

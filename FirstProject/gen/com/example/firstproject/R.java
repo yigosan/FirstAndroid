@@ -32,13 +32,13 @@ public final class R {
         public static final int tab=0x7f020008;
     }
     public static final class id {
-        public static final int action_settings=0x7f080015;
+        public static final int action_settings=0x7f080016;
         public static final int background=0x7f080009;
         public static final int button1=0x7f08000e;
         public static final int button2=0x7f080000;
         public static final int button3=0x7f08000f;
         public static final int button4=0x7f080010;
-        public static final int chbUseBrowser=0x7f080014;
+        public static final int chbUseBrowser=0x7f080015;
         public static final int editText02=0x7f08000c;
         public static final int editText1=0x7f08000d;
         public static final int galeryimageView1=0x7f080006;
@@ -48,13 +48,14 @@ public final class R {
         public static final int listView1=0x7f080011;
         public static final int listitemname=0x7f080007;
         public static final int listitemsurname=0x7f080008;
-        public static final int menuitem1=0x7f080016;
-        public static final int menuitem2=0x7f080017;
+        public static final int menuitem1=0x7f080017;
+        public static final int menuitem2=0x7f080018;
         public static final int seekBar1=0x7f08000a;
         public static final int seekBar2=0x7f08000b;
         public static final int seekBar3=0x7f080003;
+        public static final int textView1=0x7f080013;
         public static final int toggleButton1=0x7f080001;
-        public static final int txtUrl=0x7f080013;
+        public static final int txtUrl=0x7f080014;
         public static final int webView1=0x7f080012;
     }
     public static final class layout {

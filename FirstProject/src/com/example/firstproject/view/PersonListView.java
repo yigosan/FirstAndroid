@@ -23,21 +23,20 @@ public class PersonListView extends ArrayAdapter<Person> {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = convertView;
-        if (view == null) {
+        if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(_viewResourceId, null);
+            convertView = inflater.inflate(_viewResourceId, null);
         }
 
         Person person = getItem(position);
         if (person != null) {
             // My layout has only one TextView
-            TextView txtName = (TextView) view.findViewById(R.id.listitemname);
+            TextView txtName = (TextView) convertView.findViewById(R.id.listitemname);
             txtName.setText(person.getName());
-            TextView txtSurname = (TextView) view.findViewById(R.id.listitemsurname);
+            TextView txtSurname = (TextView) convertView.findViewById(R.id.listitemsurname);
             txtSurname.setText(person.getSurname());
          }
 
-        return view;
+        return convertView;
     }
 }
