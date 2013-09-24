@@ -53,7 +53,7 @@ public class WebServiceFragment extends Fragment{
 					@Override 
 					public void onPostExecute(SoapPrimitive result) {
 				 	   if(result != null)
-						   lblResult.setText(result.toString() + " Fahrenheit.");
+						   lblResult.setText(result.toString() + " Fahrenheit!");
 					   else
 						   lblResult.setText("Sonuc gelmedi");
 				    }
