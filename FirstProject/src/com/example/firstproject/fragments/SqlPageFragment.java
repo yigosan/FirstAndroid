@@ -53,7 +53,7 @@ public class SqlPageFragment extends android.app.Fragment { //implements ActionB
 	    	txtName = (EditText)mMyView.findViewById(R.id.editText1);
 	    	txtSurname = (EditText)mMyView.findViewById(R.id.editText02);
 	    	btnInsert = (Button)mMyView.findViewById(R.id.button1);
-	    	btnSelect = (Button)mMyView.findViewById(R.id.button2);
+	    	btnSelect = (Button)mMyView.findViewById(R.id.btnGetMenu);
 	    	btnUpdateFirstName = (Button)mMyView.findViewById(R.id.button3);
 	    	btnDeleteFirstName = (Button)mMyView.findViewById(R.id.button4);
 	    	lstShow = (ListView)mMyView.findViewById(R.id.listView1);

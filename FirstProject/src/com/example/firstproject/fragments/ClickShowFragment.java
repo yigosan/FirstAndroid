@@ -35,7 +35,7 @@ public class ClickShowFragment extends Fragment {
      
 	        imv1 = (ImageView)mMyView.findViewById(R.id.imageView1);
 	        imv2 = (ImageView)mMyView.findViewById(R.id.imageView2);
-	        btn2 = (Button)mMyView.findViewById(R.id.button2);
+	        btn2 = (Button)mMyView.findViewById(R.id.btnGetMenu);
 	        imv1.setVisibility(View.INVISIBLE);
 	        imv2.setVisibility(View.INVISIBLE);
 	        
